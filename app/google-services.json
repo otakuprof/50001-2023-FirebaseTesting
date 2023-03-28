@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "975953875403",
+    "firebase_url": "https://lesson5testing2-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "lesson5testing2",
+    "storage_bucket": "lesson5testing2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:975953875403:android:6c1f651e2cbd108c51664e",
+        "android_client_info": {
+          "package_name": "com.example.lesson5testing2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "975953875403-6arleg26jnb42shofq8ol443ge4aokrs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lesson5testing2",
+            "certificate_hash": "975fd6c2e18dbdcb928aa85bb61c56786cadd863"
+          }
+        },
+        {
+          "client_id": "975953875403-3r9g08c77tfda8e7sho6glaaksba85gk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCooJOIbKZIvonrmNxY6dyuDK2XIE6Ss_A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "975953875403-3r9g08c77tfda8e7sho6glaaksba85gk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
