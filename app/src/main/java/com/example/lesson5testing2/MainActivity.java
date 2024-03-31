@@ -31,7 +31,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Observer {
 
     TextView textViewSampleNodeValue;
     ImageView imageViewSatisfied;
@@ -71,22 +71,23 @@ public class MainActivity extends AppCompatActivity {
         textViewTally = findViewById(R.id.textViewTally);
         imageViewSatisfied = findViewById(R.id.imageViewSatisfied);
 
-
         //TODO 13.2 Get references to the nodes in the database:
         //TODO 13.2a We encapsulate all database operations in FirebaseStorageOperations
-        FirebaseDatabaseOperations firebaseDatabaseOperations = new FirebaseDatabaseOperations();
         //TODO 13.2b Go to FirebaseStorageOperations
 
         // TODO 13.5a Listen out for changes in the "satisfied" node and update the TextView
         // See TODO 13.5b in FirebaseDatabaseOperations
-        firebaseDatabaseOperations.updateTextViewWithNumberSatisfied(textViewTally);
+        FirebaseDbOpsSubject firebaseDbOpsSubject = new FirebaseDbOpsSubject();
+        firebaseDbOpsSubject.registerActivity(this);
+        firebaseDbOpsSubject.downloadToObserver();
 
         //TODO 13.3a When the satisfied button is clicked, push the info to the database.
         // See TODO 13.3b in FirebaseDatabaseOperations
         imageViewSatisfied.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firebaseDatabaseOperations.pushTimestampToSatisfied();
+                //firebaseDatabaseOperations.pushTimestampToSatisfied();
+                firebaseDbOpsSubject.pushTimestampToSatisfied(satisfiedTallyValue);
                 Toast.makeText(MainActivity.this, "Thank you",Toast.LENGTH_LONG)
                         .show();
             }
@@ -100,7 +101,10 @@ public class MainActivity extends AppCompatActivity {
          * The rest are to child nodes
          */
         mRootDatabaseRef = FirebaseDatabase.getInstance().getReference();
+        Log.i("DEBUG", "After 3");
+
         mNodeRefPokemon = mRootDatabaseRef.child(SAMPLE_NODE);
+        Log.i("DEBUG", "After 4");
 
         //TODO 13.4 Listen out for changes in the "pokemon" node and display a Toast
         /** this is code to update the node */
@@ -124,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
         // TODO 14.1a Get a reference to the firebase storage
         final ImageView imageViewBackground = findViewById(R.id.imageViewBackground);
         FirebaseStorageOperations firebaseStorageOperations = new FirebaseStorageOperations();
+        Log.i("DEBUG", "After 5");
 
         /** TODO 14.2 add a onClickListener to imageViewBackground,
          *  so that when the image is click,
@@ -195,5 +200,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
+    }
+
+    // TODO 13.5
+
+    @Override
+    public void update(DataSnapshot dataSnapshot) {
+        //satisfiedTallyValue = Integer.parseInt(dataSnapshot.getValue().toString());
+        satisfiedTallyValue = (int) dataSnapshot.getChildrenCount();
+        textViewTally.setText( "" + satisfiedTallyValue);
     }
 }

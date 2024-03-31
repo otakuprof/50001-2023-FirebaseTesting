@@ -37,7 +37,6 @@ public class FirebaseStorageOperations {
         StorageReference bg2storageReference = backgroundStorageReference
                 .child("background2.jpg");
         FireBaseUtils.downloadToImageView(context, bg2storageReference, imageView);
-
     }
 
     // TODO 14.3b Given a list of images in Storage, pick a random Image uri and display it on the imageView
